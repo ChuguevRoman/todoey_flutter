@@ -2,9 +2,19 @@ import 'package:flutter/material.dart';
 
 import './add_task_screen.dart';
 import '../widgets/task_list.dart';
+import '../models/task.dart';
 
-class TaskScreen extends StatelessWidget {
-  const TaskScreen({Key? key}) : super(key: key);
+class TaskScreen extends StatefulWidget {
+  @override
+  State<TaskScreen> createState() => _TaskScreenState();
+}
+
+class _TaskScreenState extends State<TaskScreen> {
+  List<Task> tasks = [
+    Task(name: 'By milk'),
+    Task(name: 'By sugar'),
+    Task(name: 'By coffee'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +67,7 @@ class TaskScreen extends StatelessWidget {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: TaskList(),
+              child: TaskList(tasks),
             ),
           ),
         ],
@@ -66,7 +76,14 @@ class TaskScreen extends StatelessWidget {
         backgroundColor: Colors.lightBlueAccent,
         onPressed: () {
           showModalBottomSheet(
-              context: context, builder: (context) => AddTaskScreen());
+            context: context,
+            builder: (context) => AddTaskScreen((newTaskTitle) {
+              setState(() {
+              tasks.add(Task(name: newTaskTitle));
+
+              });
+            }),
+          );
         },
         child: Icon(Icons.add),
       ),
