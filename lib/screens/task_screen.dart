@@ -72,7 +72,7 @@ class TaskScreen extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AddTaskScreen((newTaskTitle) {}),
+            builder: (context) => AddTaskScreen(),
           );
         },
         child: const Icon(Icons.add),
